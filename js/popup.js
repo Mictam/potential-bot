@@ -87,6 +87,19 @@ document.addEventListener('DOMContentLoaded', function() {
 	// add click listener to options button (redirect to options page)
 	document.getElementById("options_link").addEventListener("click", function(){chrome.tabs.create({'url': "/html/options.html"}); });
 
+	// add click listener to stop button 
+	document.getElementById("stop_farm").addEventListener("click", function(){
+		chrome.storage.sync.set({
+				attacksQueue: [],
+				newAttacksQueue: [],
+				status: "WAITING"
+			}, function() {
+				console.log("XD");
+			});
+	});
+	
+
+
 	//gets current village
 	sendMessage('getCurrentVillage', null, function (response){
 		currentVillage = response;

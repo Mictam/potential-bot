@@ -1,5 +1,6 @@
 
 var attacksQueue = [];
+var newAttacksQueue = [];
 var status = "WAITING"; //WAITING, PLACING_UNITS, CONFIRMING_ATTACK
 var refreshID = setInterval(tick, 500);
 
@@ -10,9 +11,11 @@ console.log(attacksQueue);
 
 function tick(){
 	chrome.storage.sync.get({
-		attacksQueue: []
+		attacksQueue: [],
+		newAttacksQueue: []
 	}, function(items) {
 		attacksQueue = items.attacksQueue;
+		newAttacksQueue = items.newAttacksQueue;
 	});
 
 	if (status == "WAITING"){
@@ -25,15 +28,32 @@ function tick(){
 			});
 			location = "game.php?screen=place";
 		}
+		else if(newAttacksQueue.length > 0)
+		{
+			attacksQueue = newAttacksQueue;
+			newAttacksQueue = [];
+			status = "PLACING_UNITS";
+			chrome.storage.sync.set({
+				attacksQueue: attacksQueue,
+				newAttacksQueue: [],
+				status: status
+			}, function() {
+				console.log("State [Placing Units]");
+			});
+			location = "game.php?screen=place";
+			continueAttack();
+	    }
 	}
 }
 
 function restore_variables() {
 	chrome.storage.sync.get({
 		attacksQueue: [],
+		newAttacksQueue: [],
 		status : "WAITING"
 	}, function(items) {
 		attacksQueue = items.attacksQueue;
+		newAttacksQueue = items.newAttacksQueue;
 		status = items.status;
 		console.log(attacksQueue);
 		continueAttack();
@@ -88,8 +108,10 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
 
 function placeAttack(){
 	var currentAttack = attacksQueue.shift();
+	newAttacksQueue.push(currentAttack)
 	chrome.storage.sync.set({
-		attacksQueue: attacksQueue
+		attacksQueue: attacksQueue,
+		newAttacksQueue: newAttacksQueue
 	}, function() {
 		console.log("Placing attack");
 		console.log(attacksQueue);
