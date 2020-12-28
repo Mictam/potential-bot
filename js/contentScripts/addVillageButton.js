@@ -34,5 +34,30 @@ $( document ).ready(function() {
 				});
 			});
 		}
+		else {
+                  
+				$("#content_value table tbody tr table:last-child tbody").append('<tr>' +
+				'<td colspan="2" id="injectedTd">' +
+				'<a id="deleteVillageButton" href=#><span class="action-icon-container">' +
+				'<span class="icon header troops"></span></span> Delete village from Farm Bot' +
+				'</a>' +
+				'</td>' +
+				'</tr>');
+
+			// add listener
+			$("#deleteVillageButton").click(function () {
+				var newVillage = {
+					isAbandoned: isAbandoned,
+					name: $("#nameInput").val(),
+					coords: coords
+				};
+
+				removeVillage(newVillage, function () {
+					$('#injectedTd').remove()
+				});
+			});
+
+
+                }
 	});
 });

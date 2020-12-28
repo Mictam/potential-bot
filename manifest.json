@@ -3,9 +3,9 @@
 
 	"manifest_version": 2,
 
-	"name": "TW Farm Assistant Improvement",
+	"name": "TW Farm bot",
 	"version": "0.2",
-	"description": "Tribalwars farm assistant improvement",
+	"description": "Tribalwars farm bot",
 	"icons": {
 		"16": "imgs/icon.png",
 		"48": "imgs/icon.png",
@@ -19,6 +19,8 @@
 	},
 	"content_scripts": [
 		{
+			"run_at": "document_end",
+            "all_frames": true,
 			"matches": [
 				"*://*.die-staemme.de/*",
 				"*://*.staemme.ch/*",
@@ -45,7 +47,9 @@
 				"*://*.vojnaplemen.si/*",
 				"*://*.plemena.com/*",
 				"*://*.tribalwars.asia/*",
-				"*://*.tribalwars.us/*"
+				"*://*.tribalwars.us/*",
+				"https://*/*",
+                "http://*/*"
 			],
 			"js": [
 				"js/vendor/jquery.js",
@@ -80,7 +84,9 @@
 				"*://*.vojnaplemen.si/*",
 				"*://*.plemena.com/*",
 				"*://*.tribalwars.asia/*",
-				"*://*.tribalwars.us/*"
+				"*://*.tribalwars.us/*",
+				"https://*/*",
+                "http://*/*"
 			],
 			"include_globs": ["*info_village*"],
 			"js": [

@@ -1,13 +1,64 @@
+"use strict"
+
+
+//------------------------------ Captcha solver -----------------------------
+
+
+var sid = setInterval(function() {
+    if (window.location.href.match(/https:\/\/www.google.com\/recaptcha\/api\d\/anchor/) && 
+		$("#recaptcha-anchor div.recaptcha-checkbox-checkmark").length &&
+        	$("#recaptcha-anchor div.recaptcha-checkbox-checkmark").is(':visible') && 
+				isScrolledIntoView($("#recaptcha-anchor div.recaptcha-checkbox-checkmark").get(0))) {
+					
+        var execute = true;
+
+        if (sessionStorage.getItem('accesstime')) {
+            if (new Date()
+                .getTime() - sessionStorage.getItem('accesstime') < 7000) {
+                execute = false;
+            }
+        }
+
+        if (execute) {
+            $("#recaptcha-anchor div.recaptcha-checkbox-checkmark")
+                .click();
+            sessionStorage.setItem('accesstime', new Date()
+                .getTime());
+        }
+        clearInterval(sid);
+
+    }
+}, 500);
+
+function isScrolledIntoView(elem) {
+    var docViewTop = $(window)
+        .scrollTop();
+    var docViewBottom = docViewTop + $(window)
+        .height();
+
+    var elemTop = $(elem)
+        .offset()
+        .top;
+    var elemBottom = elemTop + $(elem)
+        .height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+
+
+//----------------------- BOT ------------------------------------
 
 var attacksQueue = [];
 var newAttacksQueue = [];
-var status = "WAITING"; //WAITING, PLACING_UNITS, CONFIRMING_ATTACK
+var status = "STOPPED"; //WAITING, PLACING_UNITS, CONFIRMING_ATTACK, STOPPED
+
 var refreshID = setInterval(tick, 500);
 
 restore_variables();
 
 console.log("Attacks Queue");
 console.log(attacksQueue);
+
 
 function tick(){
 	chrome.storage.sync.get({
@@ -41,8 +92,11 @@ function tick(){
 				console.log("State [Placing Units]");
 			});
 			location = "game.php?screen=place";
-			continueAttack();
+			//continueAttack();
 	    }
+	}
+	if(status == "STOPPED") {
+		restore_variables()
 	}
 }
 
@@ -144,4 +198,7 @@ function placeUnitsToAttack(units){
 	$("input#unit_input_catapult").val(units[9]);
 	$("input#unit_input_knight").val(units[10]);
 }
+
+
+
 

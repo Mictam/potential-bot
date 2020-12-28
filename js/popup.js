@@ -92,12 +92,29 @@ document.addEventListener('DOMContentLoaded', function() {
 		chrome.storage.sync.set({
 				attacksQueue: [],
 				newAttacksQueue: [],
-				status: "WAITING"
+				status: "STOPPED"
+			}, function() {
+				console.log("XD");
+			});
+	});
+
+	// add click listener to stop button 
+	document.getElementById("pause_farm").addEventListener("click", function(){
+		chrome.storage.sync.set({
+				status: "STOPPED"
 			}, function() {
 				console.log("XD");
 			});
 	});
 	
+	// add click listener to stop button 
+	document.getElementById("start_farm").addEventListener("click", function(){
+		chrome.storage.sync.set({
+				status: "WAITING"
+			}, function() {
+				console.log("XD");
+			});
+	});	
 
 
 	//gets current village

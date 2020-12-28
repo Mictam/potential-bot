@@ -3,7 +3,6 @@ var charsArray = "ABCDEFGHIJKLMOPQRSTUVWXYZ".split("");
 // Saves options to chrome.storage
 function save_units() {
 	/*var villagesArray = [];
-
 	$("table#villagesTable tr").not(":first-child,:last-child").each(function() {
 		var arrayOfThisRow = [];
 		var tableData = $(this).find('td').not(":last-child");
@@ -118,7 +117,7 @@ function addVillageRow(village){
 	cell2.innerHTML = village.coords[0];
 	cell3.innerHTML = village.coords[1];
 	var deleteButton = document.createElement("img");
-	deleteButton.src = "https://dspt.innogamescdn.com/8.69/32045/graphic/delete.png";
+	deleteButton.src = "../imgs/delete.png";
 	deleteButton.addEventListener('click', function(){
 		deleteVillageRow(this);
 		removeVillage(village);
@@ -165,7 +164,7 @@ function addUnitsRow(unitsArray){
 
 	var deleteButtonCell = newRow.insertCell(unitsArray.length);
 	var deleteButton = document.createElement("img");
-	deleteButton.src = "https://dspt.innogamescdn.com/8.69/32045/graphic/delete.png";
+	deleteButton.src = "../imgs/delete.png";
 	deleteButton.addEventListener('click', function(){deleteUnitsRow(this);}, false);
 	deleteButtonCell.appendChild(deleteButton);
 

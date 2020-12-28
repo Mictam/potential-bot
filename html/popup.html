@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>TW Farm Assistant</title>
+    <title>TW Farm Bot by Kwasny</title>
 
     <style>
         body {
@@ -16,13 +16,13 @@
 </head>
 <body>
 <div id="villages" align="center">
-    <h2>TW Farm Assistant Improvment by Kwasny</h2>
+    <h2>TW Farm Bot by Kwasny</h2>
     <p id="currentVillage"></p>
     <table id="villagesTable" border="1">
         <tr>
             <th align="center">Village</th>
             <th align="center">Coords</th>
-            <th align="center"><img src="https://dspt.innogamescdn.com/8.121/36674/graphic/rechts.png" title="distance" alt="" class="">  </th>
+            <th align="center"><img src="../imgs/rechts.png" title="distance" alt="" class="">  </th>
             <th align="center">Models</th>
         </tr>
     </table>
@@ -34,7 +34,18 @@
 </div>
 
 <div align="center">
-    <a class="btn options-btn" id="stop_farm" href=#>Stop farming</a>
+    <a class="btn options-btn" id="start_farm" href=#>Start farming</a>
+    <div id="status"></div>
+</div>
+
+
+<div align="center">
+    <a class="btn options-btn" id="pause_farm" href=#>Pause farming</a>
+    <div id="status"></div>
+</div>
+
+<div align="center">
+    <a class="btn options-btn" id="stop_farm" href=#>Reset farming queue</a>
     <div id="status"></div>
 </div>
 </body>
