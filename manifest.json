@@ -47,9 +47,7 @@
 				"*://*.vojnaplemen.si/*",
 				"*://*.plemena.com/*",
 				"*://*.tribalwars.asia/*",
-				"*://*.tribalwars.us/*",
-				"https://*/*",
-                "http://*/*"
+				"*://*.tribalwars.us/*"
 			],
 			"js": [
 				"js/vendor/jquery.js",
@@ -84,9 +82,7 @@
 				"*://*.vojnaplemen.si/*",
 				"*://*.plemena.com/*",
 				"*://*.tribalwars.asia/*",
-				"*://*.tribalwars.us/*",
-				"https://*/*",
-                "http://*/*"
+				"*://*.tribalwars.us/*"
 			],
 			"include_globs": ["*info_village*"],
 			"js": [
